@@ -57,13 +57,14 @@ fun Lemonade(modifier: Modifier = Modifier) {
             else -> R.drawable.lemon_tree
         }
         val textResource = when (result) {
-            1 -> R.string.tag
-            2 -> R.string.keep
-            3 -> R.string.lemonade
-            4 -> R.string.empty
-            else -> R.string.tag
+            1 -> R.string.tap_lemon
+            2 -> R.string.squeeze_lemon
+            3 -> R.string.drink_lemonade
+            4 -> R.string.restart
+            else -> R.string.tap_lemon
         }
-        Image(
+
+            Image(
             painter = painterResource(imageResource),
             contentDescription = result.toString(),
             modifier = Modifier.clickable {
