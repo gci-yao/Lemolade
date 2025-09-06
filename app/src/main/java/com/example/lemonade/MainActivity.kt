@@ -24,9 +24,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,24 +57,27 @@ fun Lemonade(modifier: Modifier = Modifier) {
     var countSqueeze by remember { mutableIntStateOf(0) }
     var squeezeRequires by remember { mutableIntStateOf(0) }
 
+    Box(
+        modifier = Modifier.alpha(1F)
+            .fillMaxWidth()
+            .background(Color(0xFFFFFF8D))
+            .padding(vertical = 16.dp)
+            .wrapContentSize(Alignment.Center),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.title),
+            fontSize = 24.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.Black,
+
+        )
+    }
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(0xFFFFFF99))
-                .padding(vertical = 16.dp)
-                .wrapContentSize(Alignment.Center),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Lemonade",
-                fontSize = 24.sp,
-                color = Color.Black
-            )
-        }
+
         val imageResource = when (result) {
             1 -> R.drawable.lemon_tree
             2 -> R.drawable.lemon_squeeze
@@ -93,22 +98,25 @@ fun Lemonade(modifier: Modifier = Modifier) {
             contentDescription = stringResource(textResource),
             modifier = Modifier
                 .clickable {
-                    when(result){
-                        1 ->{
+                    when (result) {
+                        1 -> {
                             result = 2
-                            squeezeRequires  = (2..4).random()
+                            squeezeRequires = (2..4).random()
                             countSqueeze = 0
                         }
-                        2->{
+
+                        2 -> {
                             countSqueeze++
-                            if(countSqueeze >= squeezeRequires){
+                            if (countSqueeze >= squeezeRequires) {
                                 result = 3
                             }
                         }
-                        3->{
+
+                        3 -> {
                             result = 4
                         }
-                        4->{
+
+                        4 -> {
                             result = 1
                         }
                     }
